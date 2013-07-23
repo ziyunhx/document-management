@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xs:schema targetNamespace="http://www.brettle.com/neatupload/config/2008" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:vs="http://schemas.microsoft.com/Visual-Studio-Intellisense" elementFormDefault="qualified" attributeFormDefault="unqualified">
+  <xs:element name="neatUpload" vs:help="configuration/neatUpload">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">
+        Configuration information for the NeatUpload upload module.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="1">
+        <xs:element name="providers" vs:help="configuration/system.web/neatUpload/providers">
+          <xs:annotation>
+            <xs:documentation xml:lang="en">
+              The list of UploadStorageProviders and UploadStateStoreProviders that
+              can be selected using the defaultStorageProvider or defaultStateStoreProvider 
+              attributes of the &lt;neatUpload&gt; element.  By default, the list of providers
+              is empty and NeatUpload uses a FilesystemUploadStorageProvider and an 
+              InProcUploadStateStoreProvider.
+            </xs:documentation>
+          </xs:annotation>
+          <xs:complexType>
+            <xs:choice minOccurs="0" maxOccurs="unbounded">
+              <xs:element name="add" vs:help="configuration/system.web/httpHandlers/add">
+                <xs:annotation>
+                  <xs:documentation xml:lang="en">
+                    Adds a provider to the list of providers.  In addition to the
+                    "name" and "type" attributes required for all providers, some 
+                    providers allow additional attributes for configuring the
+                    provider.  See the provider's documentation for details.
+                  </xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                  <xs:attribute name="name" type="xs:string" use="required">
+                    <xs:annotation>
+                      <xs:documentation xml:lang="en">
+                        A friendly name for the provider which can be used as the value for
+                        the defaultStorageProvider or defaultStateStoreProvider
+                        attributes of the &lt;neatUpload&gt; element.
+                      </xs:documentation>
+                    </xs:annotation>
+                  </xs:attribute>
+                  <xs:attribute name="type" type="xs:string" use="required">
+                    <xs:annotation>
+                      <xs:documentation xml:lang="en">
+                        The type of the provider.
+                      </xs:documentation>
+                    </xs:annotation>
+                  </xs:attribute>
+                  <xs:anyAttribute processContents="skip"/>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="remove" vs:help="configuration/system.web/httpHandlers/remove" vs:nonbrowsable="true">
+                <xs:annotation>
+                  <xs:documentation xml:lang="en">
+                    Removes a provider from the list.  This is not generally necessary unless
+                    there a Web.config in a subfolder wants to name a new provider with the
+                    same name as a provider added in a parent folder.
+                  </xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                  <xs:attribute name="name" type="xs:string" use="required">
+                    <xs:annotation>
+                      <xs:documentation xml:lang="en">
+                        The name of the provider to remove from the list.
+                      </xs:documentation>
+                    </xs:annotation>
+                  </xs:attribute>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="clear" vs:help="configuration/system.web/httpHandlers/clear" vs:nonbrowsable="true">
+                <xs:annotation>
+                  <xs:documentation xml:lang="en">
+                    Removes all providers from the list.  This is not generally necessary unless
+                    there a Web.config in a subfolder wants to name a new provider with the
+                    same name as a provider added in a parent folder.
+                  </xs:documentation>
+                </xs:annotation>
+              </xs:element>
+            </xs:choice>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+      <xs:attribute name="defaultProvider" type="xs:string" use="optional">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">
+            Obsolete.  Use defaultStorageProvider instead.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="defaultStorageProvider" type="xs:string" use="optional">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">
+            The name of the provider from the &lt;providers&gt; section that the
+            upload module should use to store uploaded files.  The type of the
+            provider must derive from UploadStorageProvider.
+            By default, a FilesystemUploadStorageProvider is
+            used.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="defaultStateStoreProvider" type="xs:string" use="optional">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">
+            The name of the provider from the &lt;providers&gt; section that the
+            upload module should use to store the state of the upload.  The type of the
+            provider must derive from UploadStateStoreProvider.
+            By default, a InProcUploadStateStoreProvider is used.
+            Web farm/garden users should use a provider that maintains upload state
+            across processes (e.g. SessionBasedUploadStateStoreProvider).
+          </xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="useHttpModule" type="xs:boolean" use="optional"  default="true">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">
+            Whether the upload module installed in the &lt;httpModules&gt; section
+            should intercept requests.  Defaults to "true".
+          </xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="maxNormalRequestLength" type="xs:nonNegativeInteger" use="optional" default="4096">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">
+            The maximum allowed length (in KBytes) for the portion of a request that
+            the upload module does not stream to storage.  Defaults to 4096 (i.e. 4 MBytes).
+          </xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="maxRequestLength" type="xs:nonNegativeInteger" use="optional" default="2097151">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">
+            The maximum allowed length (in KBytes) for a request for which the the
+            upload module is enabled (i.e. useHttpModule="true").  
+            Defaults to 2097151 (i.e. 2 GBytes).
+          </xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="maxUploadRate" type="xs:int" use="optional" default="-1">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">
+            The maximum rate (in KBytes/sec) at which the upload module will receive
+            an upload request.  This can be useful during development/testing or
+            as a way to limit bandwidth usage.  Defaults to -1, which means no maximum.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="postBackIDQueryParam" type="xs:string" use="optional" default="NeatUpload_PostBackID">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">
+            The name of the query string parameter that, if present, indicates that all files
+            in the upload request should be streamed to storage.  The value of parameter will
+            be used to identify the upload so that its progress can be tracked.  
+            Defaults to "NeatUpload_PostBackID".
+          </xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="multiRequestUploadHandlerUrl" type="xs:anyURI" use="optional" default="~/NeatUpload/MultiRequestUploadHandler.ashx" vs:builder="url">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">
+            The URL of the page that handles the requests in a multi-request upload.
+            Defaults to: "~/NeatUpload/MultiRequestUploadHandler.ashx"
+          </xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="debugDirectory" type="xs:string" use="optional">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">
+            The path (absolute or relative to the webapp root) of the directory to
+            which debug info should be written.  By default, this attribute is absent
+            and no debug info is written.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="decryption" type="xs:string" use="optional">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">
+            The algorithm used to encrypt/decrypt
+            protected data that might be received from or pass through an
+            untrusted entity.  For example, this is used for UploadStorageConfig
+            objects.  By default, the .NET default Rinjdael algorithm is used.  If
+            you require FIPS compliance, you might need to set it to "3DES".
+          </xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="encryption" type="xs:string" use="optional">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">
+            Obsolete.  Same meaning as decryption attribute.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="validation" type="xs:string" use="optional">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">
+            The algorithm used to validate that
+            protected data that might be received from or pass through an
+            untrusted entity hasn't been tampered with.  For example, this is 
+            used for UploadStorageConfig
+            objects.  By default, the .NET default algorithm is used.  If
+            you require FIPS compliance, you might need to set it to "SHA1".
+          </xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="validationKey" type="xs:hexBinary" use="optional">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">
+            Obsolete.  NeatUpload no longer signs protected data.  Encrypting
+            it is sufficient.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="decryptionKey" type="xs:hexBinary" use="optional">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">
+            The 32 hex-digit key used to encrypt/decrypt
+            protected data that might be received from or pass through an
+            untrusted entity.  For example, this is used for UploadStorageConfig
+            objects.  By default, the key is generated randomly each time the
+            application starts.  In web gardens/farms, you must set this attribute
+            on all servers to the same manually generated random value.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="encryptionKey" type="xs:hexBinary" use="optional">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">
+            Obsolete.  Same meaning as decryptionKey.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="stateMergeIntervalSeconds" type="xs:double" use="optional" default="1.0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">
+            How often NeatUpload will request that the UploadStateStoreProvider merge
+            the current upload state with the stored/shared upload state.  For some 
+            UploadStateStoreProviders, higher values
+            may reduce server load while increasing the latency with which the upload
+            state is displayed to the user.  Defaults to 1 second.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="stateStaleAfterSeconds" type="xs:double" use="optional" default="60.0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">
+            The number of seconds the upload state must remain unchanged before
+            NeatUpload can request that the UploadStateStoreProvider remove the
+            upload state from the store.  This is primarily for cases where a
+            multi-request upload stops without warning between requests.  Defaults to
+            60 seconds.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

@@ -1,0 +1,113 @@
+﻿<sap:ActivityDesigner x:Class="Machine.Design.StateDesigner"
+                      xmlns:s="clr-namespace:System;assembly=mscorlib"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:sap="clr-namespace:System.Activities.Presentation;assembly=System.Activities.Presentation"
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:local="clr-namespace:Machine.Design"
+                      xmlns:mapf="clr-namespace:Machine.Design.FreeFormEditing"
+                      xmlns:mas="clr-namespace:Machine;assembly=Machine"
+                      xmlns:sa="clr-namespace:System.Activities;assembly=System.Activities"
+                      x:Name="stateDesigner"
+                      SnapsToDevicePixels="True"
+                     
+                      Collapsible="False">
+    <sap:ActivityDesigner.CommandBindings>
+        <CommandBinding Command="{x:Static local:StateDesigner.SetAsInitialCommand}" CanExecute="OnSetAsInitialCanExecute" Executed="OnSetAsInitialExecute"/>
+    </sap:ActivityDesigner.CommandBindings>
+
+    <sap:ActivityDesigner.ContextMenu>
+        <ContextMenu>
+            <MenuItem Header="设置为第一个业务节点" Command="{x:Static local:StateDesigner.SetAsInitialCommand}" Loaded="OnStateSpecificMenuItemLoaded" AutomationProperties.AutomationId="SetAsInitial"/>
+        </ContextMenu>
+    </sap:ActivityDesigner.ContextMenu>
+
+    <sap:ActivityDesigner.Resources>
+        <ResourceDictionary>
+ 
+            <DataTemplate x:Key="EditEntryExitTemplate">
+                <StackPanel>
+                    <TextBlock Margin="0,4,0,4" Text="要执行的内容"/>
+                    <Border BorderThickness="1" Margin="0,2,0,2" BorderBrush="{DynamicResource WorkflowViewElementBorderBrush}">
+                        <sap:WorkflowItemPresenter
+                            x:Name="entryPresenter"
+                            IsDefaultContainer="True"
+                            AutomationProperties.AutomationId="Entry"
+                            Item="{Binding Path=ModelItem.Entry, Mode=TwoWay}"
+                            AllowedItemType="{x:Type sa:Activity}"
+                            HintText="Drop activity here"
+                            MinWidth="300"
+                            MinHeight="150"
+                            Margin="5"
+                            AutomationProperties.Name="Entry: Drop activity here"/>
+                    </Border>
+                </StackPanel>
+            </DataTemplate>
+
+            <DataTemplate x:Key="FinalStateEntryExitTemplate">
+                <TextBlock Text="结束" />
+            </DataTemplate>
+
+            <DataTemplate x:Key="StateContainerTemplate">
+                <Grid>
+                    <local:StateContainerEditor x:Name="stateContainerEditor" PanelMinWidth="100" PanelMinHeight="25" Loaded="OnStateContainerLoaded"/>
+                </Grid>
+            </DataTemplate>
+
+            <ControlTemplate x:Key="FinalStateTemplate">
+                <ContentControl>
+                    <Border x:Name="border" BorderThickness="1"   Focusable="True" BorderBrush="Black">
+                        <Grid Background="{DynamicResource DesignerViewBackground}">
+                            <Rectangle Width="50" Height="20" Fill="Red" />
+                        </Grid>
+                    </Border>
+                </ContentControl>
+            </ControlTemplate>
+
+            <Style x:Key="StateStyle" TargetType="{x:Type ContentPresenter}">
+                <Setter Property="ContentTemplate" Value="{StaticResource StateContainerTemplate}"/>
+                <Style.Triggers>
+                    <MultiDataTrigger >
+                        <MultiDataTrigger.Conditions>
+                            <Condition Binding="{Binding Path=IsRootDesigner}" Value="true"/>
+                            <Condition Binding="{Binding Path=ModelItem.IsFinal}" Value="False"/>
+                        </MultiDataTrigger.Conditions>
+                        <Setter Property="ContentTemplate" Value="{StaticResource EditEntryExitTemplate}"/>
+                    </MultiDataTrigger>
+                    <MultiDataTrigger >
+                        <MultiDataTrigger.Conditions>
+                            <Condition Binding="{Binding Path=IsRootDesigner}" Value="true"/>
+                            <Condition Binding="{Binding Path=ModelItem.IsFinal}" Value="true"/>
+                        </MultiDataTrigger.Conditions>
+                        <Setter Property="ContentTemplate" Value="{StaticResource FinalStateEntryExitTemplate}"/>
+                    </MultiDataTrigger>
+                </Style.Triggers>
+            </Style>
+
+        </ResourceDictionary>
+    </sap:ActivityDesigner.Resources>
+    
+    <ContentPresenter Style="{StaticResource StateStyle}" Content="{Binding}" x:Name="stateContentPresenter" />
+   
+    <sap:ActivityDesigner.Style>
+        <Style TargetType="{x:Type sap:ActivityDesigner}">
+            <Style.Triggers>
+                <MultiDataTrigger>
+                    <MultiDataTrigger.Conditions>
+                        <Condition Binding="{Binding Path=ModelItem.IsFinal}" Value="True"/>
+                        <Condition Binding="{Binding Path=IsRootDesigner}" Value="False"/>
+                    </MultiDataTrigger.Conditions>
+                    <Setter Property="Template" Value="{StaticResource FinalStateTemplate}"/>
+                    <Setter Property="MaxHeight"
+                            Value="20" />
+                    <Setter Property="MaxWidth"
+                            Value="50" />
+                </MultiDataTrigger>
+            </Style.Triggers>
+        </Style>
+    </sap:ActivityDesigner.Style>
+   
+  
+
+</sap:ActivityDesigner>
+
+

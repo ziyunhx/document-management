@@ -1,0 +1,176 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>10.0</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{2A8209C3-243E-4B3B-80C0-9E48164D3254}</ProjectGuid>
+    <OutputType>library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Machine.Design</RootNamespace>
+    <AssemblyName>Machine.Design</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="System" />
+    <Reference Include="System.Activities" />
+    <Reference Include="System.Activities.Presentation" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AutoScrollHelper.cs" />
+    <Compile Include="FreeFormEditing\ConnectionPoint.cs" />
+    <Compile Include="FreeFormEditing\ConnectionPointConverter.cs" />
+    <Compile Include="FreeFormEditing\ConnectionPointsAdorner.cs" />
+    <Compile Include="FreeFormEditing\ConnectionPointType.cs" />
+    <Compile Include="FreeFormEditing\Connector.xaml.cs">
+      <DependentUpon>Connector.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="FreeFormEditing\ConnectorCreationAdorner.cs" />
+    <Compile Include="FreeFormEditing\ConnectorEditor.cs" />
+    <Compile Include="FreeFormEditing\ConnectorLabelMarginConverter.cs" />
+    <Compile Include="FreeFormEditing\ConnectorLabelVisibilityConverter.cs" />
+    <Compile Include="FreeFormEditing\ConnectorMovedEventArgs.cs" />
+    <Compile Include="FreeFormEditing\ConnectorMovedEventHandler.cs" />
+    <Compile Include="FreeFormEditing\ConnectorPointsToArrowMarginConverter.cs" />
+    <Compile Include="FreeFormEditing\ConnectorPointsToArrowTransformConverter.cs" />
+    <Compile Include="FreeFormEditing\ConnectorPointsToSegmentsConverter.cs" />
+    <Compile Include="FreeFormEditing\ConnectorRouter.cs" />
+    <Compile Include="FreeFormEditing\ConnectorStartDotConverter.cs" />
+    <Compile Include="FreeFormEditing\DesignerGeometryHelper.cs" />
+    <Compile Include="FreeFormEditing\DoubleExtensions.cs" />
+    <Compile Include="FreeFormEditing\FreeFormPanel.cs" />
+    <Compile Include="FreeFormEditing\LocationChangedEventArgs.cs" />
+    <Compile Include="FreeFormEditing\LocationChangedEventHandler.cs" />
+    <Compile Include="FreeFormEditing\PointExtensions.cs" />
+    <Compile Include="FreeFormEditing\RequiredSizeChangedEventArgs.cs" />
+    <Compile Include="FreeFormEditing\RequiredSizeChangedEventHandler.cs" />
+    <Compile Include="InitialNode.xaml.cs">
+      <DependentUpon>InitialNode.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="RegisterMetadata.cs" />
+    <Compile Include="ResizeGrip.cs" />
+    <Compile Include="SR.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SR.resx</DependentUpon>
+    </Compile>
+    <Compile Include="StateContainerEditor.CompositeView.cs" />
+    <Compile Include="StateContainerEditor.ModelChangeReactions.cs" />
+    <Compile Include="StateContainerEditor.ModelChanges.cs" />
+    <Compile Include="StateContainerEditor.Utilities.cs" />
+    <Compile Include="StateContainerEditor.xaml.cs">
+      <DependentUpon>StateContainerEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="StateDesigner.xaml.cs">
+      <DependentUpon>StateDesigner.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="StateMachineDesigner.xaml.cs">
+      <DependentUpon>StateMachineDesigner.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ToolboxItems\FinalState.cs" />
+    <Compile Include="ToolboxItems\StateMachineWithInitialStateFactory.cs" />
+    <Compile Include="TransitionDesigner.xaml.cs">
+      <DependentUpon>TransitionDesigner.xaml</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SR.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>SR.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="FreeFormEditing\Connector.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="InitialNode.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="StateContainerEditor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="StateDesigner.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="StateMachineDesigner.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="TransitionDesigner.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Machine\Machine.csproj">
+      <Project>{1376856C-7D01-43DB-89B9-2BF5AB841558}</Project>
+      <Name>Machine</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

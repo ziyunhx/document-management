@@ -1,0 +1,13 @@
+﻿<sap:ActivityDesigner x:Class="WFDesigner.DocActivityDesigner"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:sap="clr-namespace:System.Activities.Presentation;assembly=System.Activities.Presentation"
+    xmlns:sapv="clr-namespace:System.Activities.Presentation.View;assembly=System.Activities.Presentation"
+                      Height="80"
+                      Width="140" 
+                      >   
+    
+        <Grid>
+        <Image Source="image/sp.png" />
+    </Grid>
+</sap:ActivityDesigner>

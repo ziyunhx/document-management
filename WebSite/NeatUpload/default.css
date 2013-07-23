@@ -1,0 +1,30 @@
+.ProgressDisplay {
+	font-weight: bold;
+}
+
+.ProgressDisplay .StatusMessage {
+	margin: 1px;
+	height: 1.5em;
+}
+
+.ProgressDisplay .ProgressBar {
+	background-color: rgb(204, 204, 204);
+}
+
+.ProgressDisplay .ImageButton {
+	border-width: 0px; 
+	margin: 0px; 
+	padding: 0px;
+	background-color: inherit;
+}
+
+.ProgressDisplay .ImageButton img {
+	border-width: 2px; 
+	border-style: outset;
+	border-color: white;
+	margin: 0px; 
+	padding: 0px;
+	height: 1.5em;
+	vertical-align: top;
+}
+

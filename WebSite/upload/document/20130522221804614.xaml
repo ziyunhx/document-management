@@ -1,0 +1,105 @@
+﻿<Activity mc:Ignorable="sap" x:Class="Wxwinter.BPM.WFDesigner.template.状态机流程" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mv="clr-namespace:Microsoft.VisualBasic;assembly=System" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:mvc="clr-namespace:Microsoft.VisualBasic.CompilerServices;assembly=Microsoft.VisualBasic" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:s1="clr-namespace:System;assembly=System" xmlns:s2="clr-namespace:System;assembly=System.Xml" xmlns:s3="clr-namespace:System;assembly=System.Core" xmlns:s4="clr-namespace:System;assembly=System.ServiceModel" xmlns:sa="clr-namespace:System.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System" xmlns:scg1="clr-namespace:System.Collections.Generic;assembly=System.ServiceModel" xmlns:scg2="clr-namespace:System.Collections.Generic;assembly=System.Core" xmlns:scg3="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:sd1="clr-namespace:System.Data;assembly=System.Data.DataSetExtensions" xmlns:sl="clr-namespace:System.Linq;assembly=System.Core" xmlns:st="clr-namespace:System.Text;assembly=mscorlib" xmlns:wbm="clr-namespace:Wxwinter.BPM.Machine;assembly=Wxwinter.BPM.Machine" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="a" Type="InArgument(x:String)" />
+  </x:Members>
+  <sap:VirtualizedContainerService.HintSize>654,709</sap:VirtualizedContainerService.HintSize>
+  <mva:VisualBasic.Settings>Assembly references and imported namespaces serialized as XML namespaces</mva:VisualBasic.Settings>
+  <wbm:StateMachine DisplayName="状态机" sap:VirtualizedContainerService.HintSize="614,669" mva:VisualBasic.Settings="Assembly references and imported namespaces serialized as XML namespaces">
+    <wbm:StateMachine.InitialState>
+      <wbm:State x:Name="__ReferenceID0" DisplayName="第一个业务节点" sap:VirtualizedContainerService.HintSize="326,367">
+        <wbm:State.Entry>
+          <Sequence sap:VirtualizedContainerService.HintSize="300,290">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg3:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg3:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <WriteLine sap:VirtualizedContainerService.HintSize="213,63" Text="[a]" />
+            <WriteLine sap:VirtualizedContainerService.HintSize="213,63" Text="第一个业务节点" />
+          </Sequence>
+        </wbm:State.Entry>
+        <wbm:State.Transitions>
+          <wbm:Transition Source="{x:Reference __ReferenceID0}" DisplayName="a=&quot;wxd&quot;">
+            <wbm:Transition.Trigger>
+              <Sequence x:Name="__ReferenceID1" />
+            </wbm:Transition.Trigger>
+            <sap:WorkflowViewStateService.ViewState>
+              <scg3:Dictionary x:TypeArguments="x:String, x:Object">
+                <av:PointCollection x:Key="ConnectorLocation">100.177,199.5 100.177,440 160,440 160,470</av:PointCollection>
+              </scg3:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <wbm:Transition.Condition>[a="wxd"]</wbm:Transition.Condition>
+            <wbm:Transition.To>
+              <wbm:State DisplayName="{x:Null}" x:Name="__ReferenceID3" sap:VirtualizedContainerService.HintSize="200,53" IsFinal="True">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg3:Dictionary x:TypeArguments="x:String, x:Object">
+                    <av:Point x:Key="ShapeLocation">135,470</av:Point>
+                    <av:Size x:Key="ShapeSize">50,20</av:Size>
+                  </scg3:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+              </wbm:State>
+            </wbm:Transition.To>
+          </wbm:Transition>
+          <wbm:Transition Source="{x:Reference __ReferenceID0}" Trigger="{x:Reference __ReferenceID1}" DisplayName="a=&quot;wxwinter&quot;">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg3:Dictionary x:TypeArguments="x:String, x:Object">
+                <av:PointCollection x:Key="ConnectorLocation">100.177,199.5 100.177,377.326666666667 366.5,377.326666666667 366.5,270 401.5,270</av:PointCollection>
+              </scg3:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <wbm:Transition.Condition>[a="wxwinter"]</wbm:Transition.Condition>
+            <wbm:Transition.To>
+              <wbm:State x:Name="__ReferenceID2" DisplayName="第二个业务节点" sap:VirtualizedContainerService.HintSize="326,227">
+                <wbm:State.Entry>
+                  <WriteLine sap:VirtualizedContainerService.HintSize="300,150" Text="第二个业务节点" />
+                </wbm:State.Entry>
+                <wbm:State.Transitions>
+                  <wbm:Transition Source="{x:Reference __ReferenceID2}" DisplayName="">
+                    <wbm:Transition.Trigger>
+                      <Sequence />
+                    </wbm:Transition.Trigger>
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg3:Dictionary x:TypeArguments="x:String, x:Object">
+                        <av:PointCollection x:Key="ConnectorLocation">490.177,314 490.177,475 185,475</av:PointCollection>
+                      </scg3:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <wbm:Transition.To>
+                      <x:Reference>__ReferenceID3</x:Reference>
+                    </wbm:Transition.To>
+                    <wbm:Transition.Condition>True</wbm:Transition.Condition>
+                  </wbm:Transition>
+                </wbm:State.Transitions>
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg3:Dictionary x:TypeArguments="x:String, x:Object">
+                    <av:Point x:Key="ShapeLocation">401.5,226</av:Point>
+                    <av:Size x:Key="ShapeSize">177,88</av:Size>
+                    <x:Double x:Key="StateContainerWidth">163</x:Double>
+                    <x:Double x:Key="StateContainerHeight">51.653333333333364</x:Double>
+                  </scg3:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+              </wbm:State>
+            </wbm:Transition.To>
+          </wbm:Transition>
+        </wbm:State.Transitions>
+        <sap:WorkflowViewStateService.ViewState>
+          <scg3:Dictionary x:TypeArguments="x:String, x:Object">
+            <av:Point x:Key="ShapeLocation">11.5,120.5</av:Point>
+            <av:Size x:Key="ShapeSize">177,79</av:Size>
+            <x:Double x:Key="StateContainerWidth">163</x:Double>
+            <x:Double x:Key="StateContainerHeight">42.653333333333421</x:Double>
+          </scg3:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </wbm:State>
+    </wbm:StateMachine.InitialState>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg3:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+        <x:Double x:Key="StateContainerWidth">600</x:Double>
+        <x:Double x:Key="StateContainerHeight">600</x:Double>
+        <av:PointCollection x:Key="ConnectorLocation">300,77.5 300,107.5 100.177,107.5 100.177,120.5</av:PointCollection>
+      </scg3:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <x:Reference>__ReferenceID0</x:Reference>
+    <x:Reference>__ReferenceID3</x:Reference>
+    <x:Reference>__ReferenceID2</x:Reference>
+  </wbm:StateMachine>
+</Activity>

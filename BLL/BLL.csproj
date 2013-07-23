@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build">
+  <PropertyGroup>
+    <ProjectType>local</ProjectType>
+    <ProjectVersion>7.10.377</ProjectVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{A2C2571F-E3D2-43D8-A48D-414394147841}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <AssemblyName>BLL</AssemblyName>
+    <OutputType>Library</OutputType>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Data" />
+    <Reference Include="System" />
+    <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="BLL\RoleList.cs" />
+    <Compile Include="BLL\GeneralMethods.cs" />
+    <Compile Include="BLL\SystemInfo.cs" />
+    <Compile Include="BLL\WorkFlow.cs" />
+    <Compile Include="BLL\Document.cs" />
+    <Compile Include="BLL\Organizational.cs" />
+    <Compile Include="BLL\WorkFlowRole.cs" />
+    <Compile Include="BLL\WorkFlowExecution.cs" />
+    <Compile Include="Global.cs" />
+    <Compile Include="BLL\UserOperatingManager.cs" />
+    <Compile Include="BLL\Send_mailBll.cs" />
+    <Compile Include="BLL\Users.cs" />
+    <Compile Include="BLL\SelectRecord.cs" />
+    <Compile Include="BLL\UserFinanceLog.cs" />
+    <Compile Include="BLL\SelectByPager.cs" />
+    <Reference Include="System.XML" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DAL\DAL.csproj">
+      <Project>{8B33F5B7-0165-427A-92F7-96B48B7DB92A}</Project>
+      <Name>DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DBAccess\DBAccess.csproj">
+      <Project>{915A9C1E-0D22-433F-A8A3-6DF29F7B1EED}</Project>
+      <Name>DBAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Model\Model.csproj">
+      <Project>{2DB40AF1-36E8-476A-9E4B-19712B88C4E0}</Project>
+      <Name>Model</Name>
+    </ProjectReference>
+  </ItemGroup>
+</Project>

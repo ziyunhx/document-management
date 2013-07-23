@@ -1,0 +1,8 @@
+﻿<Window x:Class="UserDesigner.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="350" Width="525">
+    <Grid>
+        <StackPanel Height="100" HorizontalAlignment="Left" Margin="74,150,0,0" Name="stackPanel1" VerticalAlignment="Top" Width="200" Background="#FFDE2222" />
+    </Grid>
+</Window>
