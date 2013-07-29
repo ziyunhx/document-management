@@ -13,6 +13,8 @@ using System.Activities.Tracking;
 using WorkFlow;
 using Engine;
 using System.Activities.Presentation;
+using System.Activities.DurableInstancing;
+using DBAccess;
 
 public partial class document_AddDocument : System.Web.UI.Page
 {
@@ -26,7 +28,7 @@ public partial class document_AddDocument : System.Web.UI.Page
         {
             Model.SelectRecord selectRecord = new Model.SelectRecord("WorkFlow", "", "*", "where id='" + this.selWorkFlow.SelectedValue + "'");
             DataTable table = BLL.SelectRecord.SelectRecordData(selectRecord).Tables[0];
-            string content = File.ReadAllText(System.Web.HttpContext.Current.Request.MapPath("../") + table.Rows[0]["URL"].ToString());
+            string content = File.ReadAllText(System.Web.HttpContext.Current.Request.MapPath("../") + table.Rows[0]["URL"].ToString());            
             WorkFlowTracking.instance = engineManager.createInstance(content, null, null);
             WorkFlowTracking.instance.Run();
 
