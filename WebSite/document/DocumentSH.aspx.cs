@@ -1,40 +1,25 @@
-﻿using BLL;
-using Commons;
-using System;
-using System.Web;
-using System.IO;
+﻿using System;
+using System.Activities;
+using System.Activities.DurableInstancing;
 using System.Data;
-using System.Web.UI.WebControls;
-using System.Activities;
-using Engine;
-using System;
-using System.Collections.Generic;
+using System.IO;
 using System.Linq;
-using System.Text;
-using System.Windows;
-using WorkFlow;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-
-using System.Activities.Presentation;
-using System.Activities.Presentation.Model;
-using System.Activities.Presentation.View;
-using System.Activities.Presentation.Services;
-using System.Activities.Core.Presentation;
-using System.Activities.Presentation.Toolbox;
-using System.Activities;
-using System.Activities.Debugger;
-using System.Activities.Statements;
-using System.Activities.Presentation.Metadata;
-using System.Reflection;
+using System.Runtime.DurableInstancing;
+using System.Web;
+using System.Web.UI.WebControls;
+using BLL;
+using Commons;
+using DBAccess;
+using Engine;
 
 public partial class document_DocumentSH : System.Web.UI.Page
 {
     private static string id = string.Empty;
+    //ziyunhx add 2013-8-5 workflow Persistence
+    WorkflowApplication instance = null;
+    SqlWorkflowInstanceStore instanceStore;
+    InstanceView view;
+    //end
 
     protected void btnEdit_ServerClick(object sender, EventArgs e)
     {
@@ -46,7 +31,29 @@ public partial class document_DocumentSH : System.Web.UI.Page
         {
             Model.SelectRecord selectRecords = new Model.SelectRecord("view_DocumentInfo", "", "*", "where id='" + id + "'");
             DataTable dt = BLL.SelectRecord.SelectRecordData(selectRecords).Tables[0];
-                     
+            //ziyunhx add 2013-8-5 workflow Persistence
+            if (dt == null)
+            {
+                return;
+            }
+            Model.SelectRecord selectRecord = new Model.SelectRecord("WorkFlow", "", "*", "where id='" + dt.Rows[0]["WorkFlowID"].ToString() + "'");
+            DataTable table = BLL.SelectRecord.SelectRecordData(selectRecord).Tables[0];
+
+            string content = File.ReadAllText(System.Web.HttpContext.Current.Request.MapPath("../") + table.Rows[0]["URL"].ToString());
+
+            instance = engineManager.createInstance(content, null, null);
+            if (instanceStore == null)
+            {
+                instanceStore = new SqlWorkflowInstanceStore(SqlHelper.strconn);
+                view = instanceStore.Execute(instanceStore.CreateInstanceHandle(), new CreateWorkflowOwnerCommand(), TimeSpan.FromSeconds(30));
+                instanceStore.DefaultInstanceOwner = view.InstanceOwner;
+            }
+            instance.InstanceStore = instanceStore;
+            Guid guid = new Guid(dt.Rows[0]["FlowInstranceID"].ToString());
+            instance.Load(guid);
+            //end
+
+
             if (this.DropDown_sp.SelectedValue == "true")
             {
                 string[] s = dt.Rows[0]["OID"].ToString().Split(new char[] { ',' });
@@ -76,9 +83,9 @@ public partial class document_DocumentSH : System.Web.UI.Page
 
                         if (dtcount.Rows.Count + 1 == usercount.Rows.Count)
                         {
-                            if (WorkFlowTracking.instance.GetBookmarks().Count(p => p.BookmarkName == dt.Rows[0]["value"].ToString()) == 1)
+                            if (instance.GetBookmarks().Count(p => p.BookmarkName == dt.Rows[0]["value"].ToString()) == 1)
                             {
-                                WorkFlowTracking.instance.ResumeBookmark(dt.Rows[0]["value"].ToString(), this.DropDown_sp.SelectedValue.ToString());
+                                instance.ResumeBookmark(dt.Rows[0]["value"].ToString(), this.DropDown_sp.SelectedValue.ToString());
                             }
                         }
 
@@ -88,9 +95,9 @@ public partial class document_DocumentSH : System.Web.UI.Page
                 {
                     //一旦审批未通过，删除该公文当前流转步骤信息
                     BLL.GeneralMethods.GeneralDelDB("WorkFlowExecution", "where DID ='" + id + "' and step='" + dt.Rows[0]["WStep"].ToString() + "'");
-                    if (WorkFlowTracking.instance.GetBookmarks().Count(p => p.BookmarkName == dt.Rows[0]["value"].ToString()) == 1)
+                    if (instance.GetBookmarks().Count(p => p.BookmarkName == dt.Rows[0]["value"].ToString()) == 1)
                     {
-                        WorkFlowTracking.instance.ResumeBookmark(dt.Rows[0]["value"].ToString(), this.DropDown_sp.SelectedValue.ToString());
+                        instance.ResumeBookmark(dt.Rows[0]["value"].ToString(), this.DropDown_sp.SelectedValue.ToString());
                     }
                 }
 
@@ -118,13 +125,15 @@ public partial class document_DocumentSH : System.Web.UI.Page
 
                 BLL.WorkFlowExecution.Add(workexe);
 
-                if (WorkFlowTracking.instance.GetBookmarks().Count(p => p.BookmarkName == dt.Rows[0]["value"].ToString()) == 1)
+                if (instance.GetBookmarks().Count(p => p.BookmarkName == dt.Rows[0]["value"].ToString()) == 1)
                 {
-                    WorkFlowTracking.instance.ResumeBookmark(dt.Rows[0]["value"].ToString(), this.DropDown_sp.SelectedValue.ToString());
+                    instance.ResumeBookmark(dt.Rows[0]["value"].ToString(), this.DropDown_sp.SelectedValue.ToString());
                 }
             }
             UserOperatingManager.InputUserOperating(this.Session["admin"].ToString(), "公文管理", "公文审核" + dt.Rows[0]["Name"].ToString() + "的信息成功");
             MessageBox.ShowAndRedirect(this, "审核公文成功！", "/document/DocumentList.aspx");
+
+            instance.Unload();
         }
 
     }

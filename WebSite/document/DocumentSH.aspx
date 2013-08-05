@@ -51,7 +51,7 @@
                     </tr>
                     <tr>
                         <td colspan="2">
-                            <input id="btnEdit" type="button" value="修 改" style="width: 80px; height: 33px; margin: 10px 20px 15px 85px;
+                            <input id="btnEdit" type="button" value="审 批" style="width: 80px; height: 33px; margin: 10px 20px 15px 85px;
                                 float: left" class="sign-button" runat="server" onserverclick="btnEdit_ServerClick" />
                             <input id="btnCancel" type="button" value="返 回" style="width: 80px; height: 33px;
                                 float: left;" class="sign-button" onclick="history.go(-1)" />

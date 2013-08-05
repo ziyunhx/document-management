@@ -15,9 +15,16 @@ using Engine;
 using System.Activities.Presentation;
 using System.Activities.DurableInstancing;
 using DBAccess;
+using System.Runtime.DurableInstancing;
 
 public partial class document_AddDocument : System.Web.UI.Page
 {
+    //ziyunhx add 2013-8-5 workflow Persistence
+    WorkflowApplication instance = null;
+    SqlWorkflowInstanceStore instanceStore;
+    InstanceView view;
+    //end
+
     protected void btnAdd_ServerClick(object sender, EventArgs e)
     {
         if (((this.txtName.Value.Length == 0) || (this.uploadurl.Value.Length == 0)) || (this.selWorkFlow.SelectedValue.Length == 0))
@@ -28,9 +35,24 @@ public partial class document_AddDocument : System.Web.UI.Page
         {
             Model.SelectRecord selectRecord = new Model.SelectRecord("WorkFlow", "", "*", "where id='" + this.selWorkFlow.SelectedValue + "'");
             DataTable table = BLL.SelectRecord.SelectRecordData(selectRecord).Tables[0];
-            string content = File.ReadAllText(System.Web.HttpContext.Current.Request.MapPath("../") + table.Rows[0]["URL"].ToString());            
-            WorkFlowTracking.instance = engineManager.createInstance(content, null, null);
-            WorkFlowTracking.instance.Run();
+            
+            string content = File.ReadAllText(System.Web.HttpContext.Current.Request.MapPath("../") + table.Rows[0]["URL"].ToString());
+
+            //ziyunhx add 2013-8-5 workflow Persistence 
+            //old code
+            //WorkFlowTracking.instance = engineManager.createInstance(content, null, null);
+            //WorkFlowTracking.instance.Run();
+            //new code
+            instance = engineManager.createInstance(content, null, null);
+            if (instanceStore == null)
+            {
+                instanceStore = new SqlWorkflowInstanceStore(SqlHelper.strconn);
+                view = instanceStore.Execute(instanceStore.CreateInstanceHandle(), new CreateWorkflowOwnerCommand(), TimeSpan.FromSeconds(30));
+                instanceStore.DefaultInstanceOwner = view.InstanceOwner;
+            }
+            instance.InstanceStore = instanceStore;
+            instance.Run();
+            //end
 
             Model.Document documents = new Model.Document
             {
@@ -41,7 +63,12 @@ public partial class document_AddDocument : System.Web.UI.Page
                 WStep = "0",
                 Result = "0",
                 UID = this.Session["admin"].ToString(),
-                FlowInstranceID = WorkFlowTracking.instance.Id,
+                //ziyunhx add 2013-8-5 workflow Persistence 
+                //old code
+                //FlowInstranceID = WorkFlowTracking.instance.Id,
+                //new code
+                FlowInstranceID = instance.Id,
+                //end
             };
 
             int s = BLL.Document.DocumentAdd(documents);

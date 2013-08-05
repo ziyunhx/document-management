@@ -9,6 +9,7 @@
     <AssemblyName>DBAccess</AssemblyName>
     <OutputType>Library</OutputType>
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <PlatformTarget>x86</PlatformTarget>

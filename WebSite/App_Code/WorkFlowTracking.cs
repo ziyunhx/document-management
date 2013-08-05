@@ -17,7 +17,7 @@ namespace WorkFlow
 
     public partial class WorkFlowTracking : System.Activities.Tracking.TrackingParticipant
     {
-        public static WorkflowApplication instance;
+        //public static WorkflowApplication instance;
 
         public DebuggerService debugService { get; set; }
 
