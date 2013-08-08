@@ -34,9 +34,13 @@ namespace ActivityLibrary
         }
         protected override void Execute(NativeActivityContext context)
         {
+            DebugStatus debug = new DebugStatus();
             string bookmark = context.GetValue(bookmarkName);
             context.CreateBookmark(bookmark, new BookmarkCallback(bookmarkCallback));
-            BLL.Document.DocumentStep(context.WorkflowInstanceId, Convert.ToInt32(this.StepID).ToString());         
+            if (debug.status == 0)
+            {
+                BLL.Document.DocumentStep(context.WorkflowInstanceId, Convert.ToInt32(this.StepID).ToString());
+            }
         }
         void bookmarkCallback(NativeActivityContext context, Bookmark bookmark, object obj)
         {

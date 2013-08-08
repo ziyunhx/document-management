@@ -19,16 +19,20 @@ namespace ActivityLibrary
             try
             {
                 Guid FlowInstranceID = context.WorkflowInstanceId;
-                string result = s.Get(context);
-                if (FlowInstranceID != null)
+                DebugStatus debug = new DebugStatus();
+                if (debug.status == 0)
                 {
-                    if (result == "true")
+                    string result = s.Get(context);
+                    if (FlowInstranceID != null)
                     {
-                        BLL.Document.DocumentEndStep(FlowInstranceID, "1");
-                    }
-                    else
-                    {
-                        BLL.Document.DocumentEndStep(FlowInstranceID, "2");
+                        if (result == "true")
+                        {
+                            BLL.Document.DocumentEndStep(FlowInstranceID, "1");
+                        }
+                        else
+                        {
+                            BLL.Document.DocumentEndStep(FlowInstranceID, "2");
+                        }
                     }
                 }
             }

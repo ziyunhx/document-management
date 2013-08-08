@@ -10,6 +10,7 @@ using System.Windows.Threading;
 using System.Activities.Presentation.Debug;
 using System.ComponentModel;
 using System.Activities.Presentation;
+using ActivityLibrary;
 
 namespace WFDesigner
 {
@@ -27,6 +28,10 @@ namespace WFDesigner
             //(1)
             this.designer = designer;
             this.debugService = designer.DebugManagerView as DebuggerService; ;
+
+            //ziyunhx 2013-8-8 add debug status
+            DebugStatus debug = new DebugStatus();
+            debug.status = 1;
 
             //(2) TrackingProfile
             TrackingProfile trackingProfile = new TrackingProfile();
