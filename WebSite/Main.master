@@ -19,6 +19,7 @@
 	<!-- Mobile viewport optimized: h5bp.com/viewport -->
 	<meta name="viewport" content="width=device-width" />
 
+    <link rel="shortcut icon" href="/favicon.ico" />
 	<link rel="stylesheet" href="/styles/bootstrap.css" />
 	<link rel="stylesheet" href="/styles/bootstrap-responsive.css" />
 	<link rel="stylesheet" href="/scripts/flexslider.css" type="text/css" />
