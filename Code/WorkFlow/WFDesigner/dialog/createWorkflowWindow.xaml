@@ -1,0 +1,14 @@
+﻿<Window x:Class="WFDesigner.dialog.createWorkflowWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="创建工作流" Height="430" Width="715" WindowStartupLocation="CenterScreen" WindowStyle="ToolWindow">
+<Canvas>
+        <TextBlock Canvas.Left="12" Canvas.Top="12" Height="23" Text="模板列表" Width="130" />
+        <ListBox Canvas.Left="12" Canvas.Top="41" Height="280" Name="templateListBox" Width="237" SelectionChanged="templateListBox_SelectionChanged" />
+    
+        <TextBlock Canvas.Left="255" Canvas.Top="12" Height="23" Text="模板说明" Width="130" />
+        <TextBox AcceptsReturn="True" Canvas.Left="255" Canvas.Top="41" Height="280" Name="templateInfo" Width="417" />
+        <Button Canvas.Left="597" Canvas.Top="356" Content="取消" Height="23" Width="75" Click="Button_Click" />
+        <Button Canvas.Left="471" Canvas.Top="356" Content="确定" Height="23"  Width="75" Click="Button_Click" />
+    </Canvas>
+</Window>
