@@ -1,2 +1,0 @@
-﻿使用activityBuilder方式创建工作流
-方式与 VS2010  一样
