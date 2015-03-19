@@ -152,26 +152,6 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\BLL\BLL.csproj">
-      <Project>{A2C2571F-E3D2-43D8-A48D-414394147841}</Project>
-      <Name>BLL</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Commons\Commons.csproj">
-      <Project>{B84415E7-C6B0-4C2A-80AB-B00007FD0A04}</Project>
-      <Name>Commons</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\DAL\DAL.csproj">
-      <Project>{8B33F5B7-0165-427A-92F7-96B48B7DB92A}</Project>
-      <Name>DAL</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\DBAccess\DBAccess.csproj">
-      <Project>{915A9C1E-0D22-433F-A8A3-6DF29F7B1EED}</Project>
-      <Name>DBAccess</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Model\Model.csproj">
-      <Project>{2DB40AF1-36E8-476A-9E4B-19712B88C4E0}</Project>
-      <Name>Model</Name>
-    </ProjectReference>
     <ProjectReference Include="..\ActivityLibrary\ActivityLibrary.csproj">
       <Project>{58011CBE-710D-4E35-90E5-8C4F931E946B}</Project>
       <Name>ActivityLibrary</Name>

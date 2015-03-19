@@ -1,22 +1,14 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBAccess", "DBAccess\DBAccess.csproj", "{915A9C1E-0D22-433F-A8A3-6DF29F7B1EED}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BLL", "BLL\BLL.csproj", "{A2C2571F-E3D2-43D8-A48D-414394147841}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "DAL\DAL.csproj", "{8B33F5B7-0165-427A-92F7-96B48B7DB92A}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Commons", "Commons\Commons.csproj", "{B84415E7-C6B0-4C2A-80AB-B00007FD0A04}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Model", "Model\Model.csproj", "{2DB40AF1-36E8-476A-9E4B-19712B88C4E0}"
-EndProject
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WorkFlow", "WorkFlow", "{A0C4CE72-6807-4D54-A6B6-DEAA6253589D}"
 EndProject
 Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "WebSite", "WebSite\", "{91557317-A83A-4911-A336-6168E3B0BCD5}"
 	ProjectSection(WebsiteProperties) = preProject
 		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
-		ProjectReferences = "{A2C2571F-E3D2-43D8-A48D-414394147841}|BLL.dll;{8B33F5B7-0165-427A-92F7-96B48B7DB92A}|DAL.dll;{915A9C1E-0D22-433F-A8A3-6DF29F7B1EED}|DBAccess.dll;{2DB40AF1-36E8-476A-9E4B-19712B88C4E0}|Model.dll;{B84415E7-C6B0-4C2A-80AB-B00007FD0A04}|Commons.dll;{242D3549-ACCB-4830-B991-BA24F7E76E9E}|XMLTool.dll;{5F69B9D0-23C0-4CC6-8AE2-1D3D4468DAB2}|Engine.dll;{AB020DD7-28EE-4B03-A972-83987EA6638E}|WorkflowStruct.dll;{58011CBE-710D-4E35-90E5-8C4F931E946B}|ActivityLibrary.dll;"
+		ProjectReferences = "{242D3549-ACCB-4830-B991-BA24F7E76E9E}|XMLTool.dll;{5F69B9D0-23C0-4CC6-8AE2-1D3D4468DAB2}|Engine.dll;{AB020DD7-28EE-4B03-A972-83987EA6638E}|WorkflowStruct.dll;{58011CBE-710D-4E35-90E5-8C4F931E946B}|ActivityLibrary.dll;"
 		Debug.AspNetCompiler.VirtualPath = "/WebSite"
 		Debug.AspNetCompiler.PhysicalPath = "WebSite\"
 		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\WebSite\"
@@ -51,6 +43,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XMLTool", "WorkFlow\XMLTool
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ActivityLibrary", "WorkFlow\ActivityLibrary\ActivityLibrary.csproj", "{58011CBE-710D-4E35-90E5-8C4F931E946B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BLL", "BLL\BLL.csproj", "{A2C2571F-E3D2-43D8-A48D-414394147841}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -61,56 +55,6 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{915A9C1E-0D22-433F-A8A3-6DF29F7B1EED}.Debug|Any CPU.ActiveCfg = Debug|x86
-		{915A9C1E-0D22-433F-A8A3-6DF29F7B1EED}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
-		{915A9C1E-0D22-433F-A8A3-6DF29F7B1EED}.Debug|Mixed Platforms.Build.0 = Debug|x86
-		{915A9C1E-0D22-433F-A8A3-6DF29F7B1EED}.Debug|x86.ActiveCfg = Debug|x86
-		{915A9C1E-0D22-433F-A8A3-6DF29F7B1EED}.Debug|x86.Build.0 = Debug|x86
-		{915A9C1E-0D22-433F-A8A3-6DF29F7B1EED}.Release|Any CPU.ActiveCfg = Release|x86
-		{915A9C1E-0D22-433F-A8A3-6DF29F7B1EED}.Release|Mixed Platforms.ActiveCfg = Release|x86
-		{915A9C1E-0D22-433F-A8A3-6DF29F7B1EED}.Release|Mixed Platforms.Build.0 = Release|x86
-		{915A9C1E-0D22-433F-A8A3-6DF29F7B1EED}.Release|x86.ActiveCfg = Release|x86
-		{915A9C1E-0D22-433F-A8A3-6DF29F7B1EED}.Release|x86.Build.0 = Release|x86
-		{A2C2571F-E3D2-43D8-A48D-414394147841}.Debug|Any CPU.ActiveCfg = Debug|x86
-		{A2C2571F-E3D2-43D8-A48D-414394147841}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
-		{A2C2571F-E3D2-43D8-A48D-414394147841}.Debug|Mixed Platforms.Build.0 = Debug|x86
-		{A2C2571F-E3D2-43D8-A48D-414394147841}.Debug|x86.ActiveCfg = Debug|x86
-		{A2C2571F-E3D2-43D8-A48D-414394147841}.Debug|x86.Build.0 = Debug|x86
-		{A2C2571F-E3D2-43D8-A48D-414394147841}.Release|Any CPU.ActiveCfg = Release|x86
-		{A2C2571F-E3D2-43D8-A48D-414394147841}.Release|Mixed Platforms.ActiveCfg = Release|x86
-		{A2C2571F-E3D2-43D8-A48D-414394147841}.Release|Mixed Platforms.Build.0 = Release|x86
-		{A2C2571F-E3D2-43D8-A48D-414394147841}.Release|x86.ActiveCfg = Release|x86
-		{A2C2571F-E3D2-43D8-A48D-414394147841}.Release|x86.Build.0 = Release|x86
-		{8B33F5B7-0165-427A-92F7-96B48B7DB92A}.Debug|Any CPU.ActiveCfg = Debug|x86
-		{8B33F5B7-0165-427A-92F7-96B48B7DB92A}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
-		{8B33F5B7-0165-427A-92F7-96B48B7DB92A}.Debug|Mixed Platforms.Build.0 = Debug|x86
-		{8B33F5B7-0165-427A-92F7-96B48B7DB92A}.Debug|x86.ActiveCfg = Debug|x86
-		{8B33F5B7-0165-427A-92F7-96B48B7DB92A}.Debug|x86.Build.0 = Debug|x86
-		{8B33F5B7-0165-427A-92F7-96B48B7DB92A}.Release|Any CPU.ActiveCfg = Release|x86
-		{8B33F5B7-0165-427A-92F7-96B48B7DB92A}.Release|Mixed Platforms.ActiveCfg = Release|x86
-		{8B33F5B7-0165-427A-92F7-96B48B7DB92A}.Release|Mixed Platforms.Build.0 = Release|x86
-		{8B33F5B7-0165-427A-92F7-96B48B7DB92A}.Release|x86.ActiveCfg = Release|x86
-		{8B33F5B7-0165-427A-92F7-96B48B7DB92A}.Release|x86.Build.0 = Release|x86
-		{B84415E7-C6B0-4C2A-80AB-B00007FD0A04}.Debug|Any CPU.ActiveCfg = Debug|x86
-		{B84415E7-C6B0-4C2A-80AB-B00007FD0A04}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
-		{B84415E7-C6B0-4C2A-80AB-B00007FD0A04}.Debug|Mixed Platforms.Build.0 = Debug|x86
-		{B84415E7-C6B0-4C2A-80AB-B00007FD0A04}.Debug|x86.ActiveCfg = Debug|x86
-		{B84415E7-C6B0-4C2A-80AB-B00007FD0A04}.Debug|x86.Build.0 = Debug|x86
-		{B84415E7-C6B0-4C2A-80AB-B00007FD0A04}.Release|Any CPU.ActiveCfg = Release|x86
-		{B84415E7-C6B0-4C2A-80AB-B00007FD0A04}.Release|Mixed Platforms.ActiveCfg = Release|x86
-		{B84415E7-C6B0-4C2A-80AB-B00007FD0A04}.Release|Mixed Platforms.Build.0 = Release|x86
-		{B84415E7-C6B0-4C2A-80AB-B00007FD0A04}.Release|x86.ActiveCfg = Release|x86
-		{B84415E7-C6B0-4C2A-80AB-B00007FD0A04}.Release|x86.Build.0 = Release|x86
-		{2DB40AF1-36E8-476A-9E4B-19712B88C4E0}.Debug|Any CPU.ActiveCfg = Debug|x86
-		{2DB40AF1-36E8-476A-9E4B-19712B88C4E0}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
-		{2DB40AF1-36E8-476A-9E4B-19712B88C4E0}.Debug|Mixed Platforms.Build.0 = Debug|x86
-		{2DB40AF1-36E8-476A-9E4B-19712B88C4E0}.Debug|x86.ActiveCfg = Debug|x86
-		{2DB40AF1-36E8-476A-9E4B-19712B88C4E0}.Debug|x86.Build.0 = Debug|x86
-		{2DB40AF1-36E8-476A-9E4B-19712B88C4E0}.Release|Any CPU.ActiveCfg = Release|x86
-		{2DB40AF1-36E8-476A-9E4B-19712B88C4E0}.Release|Mixed Platforms.ActiveCfg = Release|x86
-		{2DB40AF1-36E8-476A-9E4B-19712B88C4E0}.Release|Mixed Platforms.Build.0 = Release|x86
-		{2DB40AF1-36E8-476A-9E4B-19712B88C4E0}.Release|x86.ActiveCfg = Release|x86
-		{2DB40AF1-36E8-476A-9E4B-19712B88C4E0}.Release|x86.Build.0 = Release|x86
 		{91557317-A83A-4911-A336-6168E3B0BCD5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{91557317-A83A-4911-A336-6168E3B0BCD5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{91557317-A83A-4911-A336-6168E3B0BCD5}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
@@ -201,6 +145,16 @@ Global
 		{58011CBE-710D-4E35-90E5-8C4F931E946B}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{58011CBE-710D-4E35-90E5-8C4F931E946B}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{58011CBE-710D-4E35-90E5-8C4F931E946B}.Release|x86.ActiveCfg = Release|Any CPU
+		{A2C2571F-E3D2-43D8-A48D-414394147841}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{A2C2571F-E3D2-43D8-A48D-414394147841}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{A2C2571F-E3D2-43D8-A48D-414394147841}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{A2C2571F-E3D2-43D8-A48D-414394147841}.Debug|x86.ActiveCfg = Debug|x86
+		{A2C2571F-E3D2-43D8-A48D-414394147841}.Debug|x86.Build.0 = Debug|x86
+		{A2C2571F-E3D2-43D8-A48D-414394147841}.Release|Any CPU.ActiveCfg = Release|x86
+		{A2C2571F-E3D2-43D8-A48D-414394147841}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{A2C2571F-E3D2-43D8-A48D-414394147841}.Release|Mixed Platforms.Build.0 = Release|x86
+		{A2C2571F-E3D2-43D8-A48D-414394147841}.Release|x86.ActiveCfg = Release|x86
+		{A2C2571F-E3D2-43D8-A48D-414394147841}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
