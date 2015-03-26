@@ -14,6 +14,7 @@ x64/
 build/
 [Bb]in/
 [Oo]bj/
+DocManage.sln.ide/
 
 # MSTest test Results
 [Tt]est[Rr]esult*/
