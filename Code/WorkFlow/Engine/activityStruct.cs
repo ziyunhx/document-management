@@ -22,13 +22,11 @@ namespace Engine
         }
 
 
-
-
         static void printActivityTree(Activity activity, string tag)
         {
             Console.WriteLine("{0} DisplayName:{1},type:{2}", tag, activity.DisplayName, activity.GetType());
 
-            System.Collections.Generic.IEnumerator<Activity> list = WorkflowInspectionServices.GetActivities(activity).GetEnumerator();
+            IEnumerator<Activity> list = WorkflowInspectionServices.GetActivities(activity).GetEnumerator();
 
             while (list.MoveNext())
             {
@@ -50,11 +48,9 @@ namespace Engine
                 tag.parent = null;
                 tag.currentActivity = activity;
                 tag.displayName = activity.DisplayName;
-
             }
 
-
-            System.Collections.Generic.IEnumerator<Activity> list = WorkflowInspectionServices.GetActivities(activity).GetEnumerator();
+            IEnumerator<Activity> list = WorkflowInspectionServices.GetActivities(activity).GetEnumerator();
 
             while (list.MoveNext())
             {
@@ -66,11 +62,6 @@ namespace Engine
                 printActivityTreeA(list.Current);
 
             }
-
         }
-
-
-
-
     }
 }

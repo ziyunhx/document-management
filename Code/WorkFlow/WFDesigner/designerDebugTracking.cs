@@ -1,20 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using ActivityLibrary;
+using System;
 using System.Activities;
 using System.Activities.Debugger;
+using System.Activities.Presentation;
+using System.Activities.Presentation.Debug;
 using System.Activities.Presentation.Services;
 using System.Activities.Tracking;
-using System.Windows.Threading;
-using System.Activities.Presentation.Debug;
+using System.Collections.Generic;
 using System.ComponentModel;
-using System.Activities.Presentation;
-using ActivityLibrary;
+using System.Windows.Threading;
 
 namespace WFDesigner
 {
-    public partial class designerDebugTracking : System.Activities.Tracking.TrackingParticipant
+    public partial class designerDebugTracking : TrackingParticipant
     {
         public DebuggerService debugService { get; set; }
 
@@ -38,7 +36,7 @@ namespace WFDesigner
             ActivityStateQuery activityStateQuery = new ActivityStateQuery()
             {
                 ActivityName = "*",
-                States = { System.Activities.Tracking.ActivityStates.Executing },
+                States = { ActivityStates.Executing },
                 Variables = { "*" },
                 Arguments = { "*" }
             };
@@ -60,13 +58,13 @@ namespace WFDesigner
         {
             if (trackingDataList == null)
             {
-                trackingDataList = new System.ComponentModel.BindingList<designerDebugTrackingData>();
+                trackingDataList = new BindingList<designerDebugTrackingData>();
             }
             else
             {
                 trackingDataList.Clear();
             }
-            System.Activities.Presentation.WorkflowFileItem fileItem = designer.Context.Items.GetValue(typeof(System.Activities.Presentation.WorkflowFileItem)) as System.Activities.Presentation.WorkflowFileItem;
+            WorkflowFileItem fileItem = designer.Context.Items.GetValue(typeof(WorkflowFileItem)) as WorkflowFileItem;
             designer.DebugManagerView.CurrentLocation = new SourceLocation(fileItem.LoadedFile, 1, 1, 1, 10);
         }
 
@@ -108,14 +106,10 @@ namespace WFDesigner
         Dictionary<object, SourceLocation> sourceLocationList;
 
         int step = 0;
-
-
         protected override void Track(TrackingRecord record, TimeSpan timeout)
         {
-
             {
                 ActivityStateRecord activityStateRecord = record as ActivityStateRecord;
-
                 if (activityStateRecord != null)
                 {
                     if (activityMapList.ContainsKey(activityStateRecord.Activity.Id))
@@ -135,22 +129,10 @@ namespace WFDesigner
                             designer.DebugManagerView.CurrentLocation = this.sourceLocationList[trackingData.Activity];
                             trackingDataList.Add(trackingData);
                             System.Threading.Thread.Sleep(1000);
-                        }
-                                                                                                                            )
-                                                                       );
-                        //
+                        }));
                     }
-
-
                 }
-
-
-
-
             }
-
-
-
         }
 
         Dictionary<string, Activity> getActivityMapList(Dictionary<object, SourceLocation> sourceLocationMap)
@@ -177,8 +159,7 @@ namespace WFDesigner
             Dictionary<object, SourceLocation> runtime_debug = new Dictionary<object, SourceLocation>();
             Dictionary<object, SourceLocation> debug_debug = new Dictionary<object, SourceLocation>();
 
-            System.Activities.Presentation.WorkflowFileItem fileItem = designer.Context.Items.GetValue(typeof(System.Activities.Presentation.WorkflowFileItem)) as System.Activities.Presentation.WorkflowFileItem;
-
+            WorkflowFileItem fileItem = designer.Context.Items.GetValue(typeof(WorkflowFileItem)) as WorkflowFileItem;
 
             Activity debugActivity = getDebugActivity();
             Activity runtimeActivity = getRuntimeActivity();
@@ -232,14 +213,11 @@ namespace WFDesigner
 
             return runtimeActivity;
         } //end 
-
-
-
     }//end class
 
     public class designerDebugTrackingData
     {
-        public System.Activities.Debugger.SourceLocation sourceLocation { get; set; }
+        public SourceLocation sourceLocation { get; set; }
 
         public string stepID { get; set; }
 

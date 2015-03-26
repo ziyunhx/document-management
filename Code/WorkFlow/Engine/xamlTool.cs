@@ -8,20 +8,18 @@ using System.Xml;
 using System.Activities.Statements;
 using System.Activities.Presentation.View;
 using System.Activities.XamlIntegration;
-using WorkflowStruct;
+using WorkFlow.Core;
 
 namespace Engine
 {
-
     public static class tool
     {
-
         //从[xaml]字串得到[Activity]对象
         public static Activity activityByXaml(string xaml,bool isCheck=true)
         {
             System.IO.StringReader stringReader = new System.IO.StringReader(xaml);
 
-            Activity activity = System.Activities.XamlIntegration.ActivityXamlServices.Load(stringReader);
+            Activity activity = ActivityXamlServices.Load(stringReader);
 
             if (isCheck)
             {
@@ -29,9 +27,7 @@ namespace Engine
             }
 
             return activity;
-        }//end 
-
-    
+        }//end     
 
         //从[xaml]字串得到[ActivityBuilder]对象
         public static string xamlFromActivityBuilder(ActivityBuilder activityBuilder)
@@ -42,19 +38,13 @@ namespace Engine
 
             System.IO.StringWriter stringWriter = new System.IO.StringWriter(stringBuilder);
 
-            System.Xaml.XamlSchemaContext xamlSchemaContext = new System.Xaml.XamlSchemaContext();
-
-            System.Xaml.XamlXmlWriter xamlXmlWriter = new System.Xaml.XamlXmlWriter(stringWriter, xamlSchemaContext);
-
-
-            System.Xaml.XamlWriter xamlWriter = System.Activities.XamlIntegration.ActivityXamlServices.CreateBuilderWriter(xamlXmlWriter);
-
-            System.Xaml.XamlServices.Save(xamlWriter, activityBuilder);
-
+            XamlSchemaContext xamlSchemaContext = new XamlSchemaContext();
+            XamlXmlWriter xamlXmlWriter = new XamlXmlWriter(stringWriter, xamlSchemaContext);
+            XamlWriter xamlWriter = ActivityXamlServices.CreateBuilderWriter(xamlXmlWriter);
+            XamlServices.Save(xamlWriter, activityBuilder);
             xamlString = stringBuilder.ToString();
 
             return xamlString;
-
         }
 
 
@@ -63,10 +53,10 @@ namespace Engine
         {
             ActivityBuilder activityBuilder = null;
             System.IO.StringReader stringReader = new System.IO.StringReader(xaml);
-            System.Xaml.XamlXmlReader xamlXmlReader = new System.Xaml.XamlXmlReader(stringReader);
-            System.Xaml.XamlReader xamlReader = ActivityXamlServices.CreateBuilderReader(xamlXmlReader);
+            XamlXmlReader xamlXmlReader = new XamlXmlReader(stringReader);
+            XamlReader xamlReader = ActivityXamlServices.CreateBuilderReader(xamlXmlReader);
 
-            activityBuilder = System.Xaml.XamlServices.Load(xamlReader) as ActivityBuilder;
+            activityBuilder = XamlServices.Load(xamlReader) as ActivityBuilder;
 
             if (activityBuilder != null)
             {
@@ -89,8 +79,7 @@ namespace Engine
         //保存[xaml]字串到文件
         public static void activityToFile(Activity activity, string fileName)
         {
-            System.Xaml.XamlServices.Save(fileName, activity);
-
+            XamlServices.Save(fileName, activity);
         }
 
 
@@ -152,13 +141,13 @@ namespace Engine
 
 
         //得到自定义流程图
-        public static flowcharStruct getFlowcharStruct(string xaml)
+        public static FlowcharStruct getFlowcharStruct(string xaml)
         {
 
             char[] sp = { ',' };
             char[] sl = { ' ' };
             //(1)
-            WorkflowStruct.flowcharStruct flowcharStruct = new WorkflowStruct.flowcharStruct();
+            FlowcharStruct flowcharStruct = new FlowcharStruct();
 
             //(2)
             DynamicActivity dynamicActivity = tool.activityByXaml(xaml) as DynamicActivity;
@@ -197,14 +186,14 @@ namespace Engine
             {
                 string ConnectorLocation = WorkflowViewStateService.GetViewState(flowchar)["ConnectorLocation"].ToString();
                 string[] points = ConnectorLocation.Split(sl);
-                WorkflowStruct.line oneline = new WorkflowStruct.line();
+                WFLine oneline = new WFLine();
                 oneline.beginNodeID = flowchar.Id;
                 oneline.text = flowchar.DisplayName;
                 foreach (string item in points)
                 {
                     double x = double.Parse(item.Split(sp)[0]);
                     double y = double.Parse(item.Split(sp)[1]);
-                    oneline.connectorPoint.Add(new WorkflowStruct.point() { x = x, y = y });
+                    oneline.connectorPoint.Add(new WFPoint() { x = x, y = y });
                 }
                 flowcharStruct.lineList.Add(oneline);
             }
@@ -215,7 +204,7 @@ namespace Engine
                 FlowStep flowStep = flowNode as FlowStep;
                 if (flowStep != null)
                 {
-                    WorkflowStruct.node node = new WorkflowStruct.node();
+                    WFNode node = new WFNode();
 
                     node.DisplayName = flowStep.Action.DisplayName;
                     node.id = flowStep.Action.Id;
@@ -241,14 +230,14 @@ namespace Engine
                     {
                         string ConnectorLocation = WorkflowViewStateService.GetViewState(flowStep)["ConnectorLocation"].ToString();
                         string[] points = ConnectorLocation.Split(sl);
-                        WorkflowStruct.line line = new WorkflowStruct.line();
+                        WFLine line = new WFLine();
                         line.beginNodeID = flowStep.Action.Id;
                         line.text = flowStep.Action.DisplayName;
                         foreach (string item in points)
                         {
                             double x = double.Parse(item.Split(sp)[0]);
                             double y = double.Parse(item.Split(sp)[1]);
-                            line.connectorPoint.Add(new WorkflowStruct.point() { x = x, y = y });
+                            line.connectorPoint.Add(new WFPoint() { x = x, y = y });
                         }
                         flowcharStruct.lineList.Add(line);
                     }
@@ -265,7 +254,7 @@ namespace Engine
 
                 if (flowSwitch != null)
                 {
-                    WorkflowStruct.node node = new WorkflowStruct.node();
+                    WFNode node = new WFNode();
 
                     node.DisplayName = flowSwitch.Expression.DisplayName;
                     node.id = flowSwitch.Expression.Id;
@@ -292,14 +281,14 @@ namespace Engine
                     {
                         string ConnectorLocation = WorkflowViewStateService.GetViewState(flowSwitch)["Default"].ToString();
                         string[] points = ConnectorLocation.Split(sl);
-                        WorkflowStruct.line line = new WorkflowStruct.line();
+                        WFLine line = new WFLine();
                         line.beginNodeID = flowSwitch.Expression.Id;
                         line.text = flowSwitch.Expression.DisplayName;
                         foreach (string item in points)
                         {
                             double x = double.Parse(item.Split(sp)[0]);
                             double y = double.Parse(item.Split(sp)[1]);
-                            line.connectorPoint.Add(new WorkflowStruct.point() { x = x, y = y });
+                            line.connectorPoint.Add(new WFPoint() { x = x, y = y });
                         }
                         flowcharStruct.lineList.Add(line);
                     }
@@ -308,35 +297,31 @@ namespace Engine
                     foreach (var v in flowSwitch.Cases)
                     {
 
-                        System.Activities.Statements.FlowNode next = v.Value;
-                        System.Console.WriteLine(v.Key);
+                        FlowNode next = v.Value;
+                        Console.WriteLine(v.Key);
                         string caseValue = v.Key + "Connector";
                         if (WorkflowViewStateService.GetViewState(flowSwitch).Count(p => p.Key == caseValue) == 1)
                         {
                             string ConnectorLocation = WorkflowViewStateService.GetViewState(flowSwitch)[caseValue].ToString();
                             string[] points = ConnectorLocation.Split(sl);
-                            WorkflowStruct.line line = new WorkflowStruct.line();
+                            WFLine line = new WFLine();
                             line.beginNodeID = flowSwitch.Expression.Id;
                             line.text = flowSwitch.Expression.DisplayName;
                             foreach (string item in points)
                             {
                                 double x = double.Parse(item.Split(sp)[0]);
                                 double y = double.Parse(item.Split(sp)[1]);
-                                line.connectorPoint.Add(new WorkflowStruct.point() { x = x, y = y });
+                                line.connectorPoint.Add(new WFPoint() { x = x, y = y });
                             }
                             flowcharStruct.lineList.Add(line);
                         }
                     }
                     flowcharStruct.nodeList.Add(node);
                 }
-
-
             }
 
             return flowcharStruct;
-
         }//end
-
     }
 
 
@@ -345,11 +330,8 @@ namespace Engine
         activity, dynamicActivity, activityBuilder, other
     }
 
-
     internal class viewStateXamlWriter : XamlWriter
     {
-
-
         public viewStateXamlWriter(XamlWriter innerWriter)
         {
             this.InnerWriter = innerWriter;
@@ -473,7 +455,4 @@ namespace Engine
         private Int32 m_attachedPropertyDepth = 0;
         const String c_sapNamespaceURI = "http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation";
     }//end class
-
-
- 
 }

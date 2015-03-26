@@ -26,6 +26,7 @@ using System.Reflection;
 using UserDesigner;
 using WFDesigner.dialog;
 using Engine;
+using Microsoft.Win32;
 
 namespace WFDesigner
 {
@@ -60,10 +61,7 @@ namespace WFDesigner
 
             (new DesignerMetadata()).Register();
 
-
             (new Machine.Design.DesignerMetadata()).Register();
-
-
 
             this.DataContext = this;
 
@@ -132,7 +130,7 @@ namespace WFDesigner
             {
                 if (workflowFilePathName == "tempRun.xaml")
                 {
-                    Microsoft.Win32.SaveFileDialog saveFileDialog = new Microsoft.Win32.SaveFileDialog();
+                    SaveFileDialog saveFileDialog = new SaveFileDialog();
                     if (saveFileDialog.ShowDialog(this).Value)
                     {
                         designer.Save(saveFileDialog.FileName);
@@ -158,7 +156,6 @@ namespace WFDesigner
     //UI响应
     public partial class designWindow
     {
-
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
             MenuItem menuItem = sender as MenuItem;
@@ -194,7 +191,7 @@ namespace WFDesigner
                     break;
 
                 case "打开":
-                    Microsoft.Win32.OpenFileDialog openDialog = new Microsoft.Win32.OpenFileDialog();
+                    OpenFileDialog openDialog = new OpenFileDialog();
                     if (openDialog.ShowDialog(this).Value)
                     {
                         loadWorkflowFromFile(openDialog.FileName);
@@ -214,13 +211,13 @@ namespace WFDesigner
                 case "嵌入式子流程":
 
                     var list = designerTool.getSelectActivityList(designer);
-                    Type type = typeof(System.Activities.Statements.Sequence);
+                    Type type = typeof(Sequence);
 
                     foreach (var item in list)
                     {
                         if (item.ItemType == type)
                         {
-                            dialog.openChildWorkflowWindow o = new dialog.openChildWorkflowWindow();
+                            openChildWorkflowWindow o = new openChildWorkflowWindow();
                             o.ShowDialog();
                             if (o.activity != null)
                             {
@@ -278,11 +275,6 @@ namespace WFDesigner
                 case "清空流程设计跟踪":
                     desigeerActionList.Items.Clear();
                     break;
-
-
-
-
-
                 //--------- [调试] -----------------
                 case "运行":
 
@@ -290,18 +282,12 @@ namespace WFDesigner
                     runWorkflow();
 
                     break;
-
-
                 case "清除跟踪信息":
                     trackingList.ItemsSource = null;
                     tracker.clearTrackInfo();
                     break;
 
                 //--------- [查看] -----------------
-
-
-
-
                 case "XAML":
 
                     (new Window() { Content = new TextBox() { Text = designer.Text, AcceptsReturn = true, HorizontalScrollBarVisibility = ScrollBarVisibility.Visible, VerticalScrollBarVisibility = ScrollBarVisibility.Visible } }).Show();
@@ -365,11 +351,6 @@ namespace WFDesigner
                 this.designer.DebugManagerView.CurrentLocation = td.sourceLocation;
             }
         } //end
-
-
-
-
-
     }//end class
 
     //流程启动部分
@@ -400,20 +381,20 @@ namespace WFDesigner
 
             trackingList.ItemsSource = tracker.trackingDataList;
 
-            dialog.startWorkflowWindow startWorkflowWindow = new dialog.startWorkflowWindow(key);
+            startWorkflowWindow startWorkflowWindow = new startWorkflowWindow(key);
              startWorkflowWindow.ShowDialog();
 
                 switch (startWorkflowWindow.selectButtonValue)
                 {
                     case "参数启动":
                         
-                      instance = Engine.engineManager.createInstance(designer.Text, startWorkflowWindow.dictionary, tracker);
+                      instance = engineManager.createInstance(designer.Text, startWorkflowWindow.dictionary, tracker);
                        
                         startWorkflowWindow.Close();
                         break;
 
                     case "无参数启动":
-                      instance = Engine.engineManager.createInstance(designer.Text,null, tracker);
+                      instance = engineManager.createInstance(designer.Text,null, tracker);
                       
                         startWorkflowWindow.Close();
                         break;
@@ -449,9 +430,9 @@ namespace WFDesigner
                 {
                     foreach (var v in instance.GetBookmarks())
                     {
-                        System.Console.WriteLine("--------请从下面选项中选择一BookmarkName---------------------------");
-                        System.Console.WriteLine("BookmarkName:{0}:,OwnerDisplayName:{1}", v.BookmarkName, v.OwnerDisplayName);
-                        System.Console.WriteLine("================================");
+                        Console.WriteLine("--------请从下面选项中选择一BookmarkName---------------------------");
+                        Console.WriteLine("BookmarkName:{0}:,OwnerDisplayName:{1}", v.BookmarkName, v.OwnerDisplayName);
+                        Console.WriteLine("================================");
                     }
                 }
             }
@@ -563,8 +544,4 @@ namespace WFDesigner
         }//end
       
     }
-
-
-
-  
 }

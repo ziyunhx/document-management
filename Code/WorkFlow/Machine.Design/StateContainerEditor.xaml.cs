@@ -1284,7 +1284,7 @@ namespace Machine.Design
         void OnStateContainerGridDrop(object sender, DragEventArgs e)
         {
             e.Effects = DragDropEffects.None;
-            Object droppedObject = DragDropHelper.GetDroppedObject(this, e, Context);
+            Object droppedObject = DragDropHelper.GetDroppedObjects(this, e, Context).FirstOrDefault();
             // Marking the event as being handled. In whichever case we want to route the event, it will be unmarked explicitly.
             e.Handled = true;
             if (droppedObject != null)
@@ -1338,7 +1338,7 @@ namespace Machine.Design
                             // To make sure the connectors are still connected to the connection points
                             OffsetConnectorViewState(droppedModelItem, oldLocation, newLocation);
                         }
-                        this.StoreShapeLocationViewState(droppedModelItem, shapeLocation);
+                        this.StoreShapeLocationViewState(droppedModelItem, shapeLocation);                        
                         DragDropHelper.SetDragDropCompletedEffects(e, DragDropEffects.Move);
                         this.Dispatcher.BeginInvoke(
                             new Action(() =>

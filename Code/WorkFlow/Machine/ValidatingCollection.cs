@@ -1,13 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Collections.ObjectModel;
 
 namespace Machine
 {
-    using System;
-    using System.Collections.ObjectModel;
-
     /// <summary>
     /// Customized collection which could enable some validation.
     /// </summary>

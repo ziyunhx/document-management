@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Activities;
-using System.ComponentModel;
+﻿using System.Activities;
 
 namespace ActivityLibrary
 {
@@ -39,7 +34,8 @@ namespace ActivityLibrary
             context.CreateBookmark(bookmark, new BookmarkCallback(bookmarkCallback));
             if (debug.status == 0)
             {
-                BLL.Document.DocumentStep(context.WorkflowInstanceId, Convert.ToInt32(this.StepID).ToString());
+                //TODO Change to the choice step.
+                //BLL.Document.DocumentStep(context.WorkflowInstanceId, Convert.ToInt32(this.StepID).ToString());
             }
         }
         void bookmarkCallback(NativeActivityContext context, Bookmark bookmark, object obj)

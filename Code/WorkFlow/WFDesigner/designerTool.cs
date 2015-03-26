@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Activities;
+﻿using System.Activities.Presentation;
 using System.Activities.Presentation.Model;
-using System.Activities.Presentation;
 using System.Activities.Presentation.View;
+using System.Collections.Generic;
 
 namespace WFDesigner
 {
-   public  class designerTool
+    public  class designerTool
     {
        public static IEnumerable<ModelItem> getSelectActivityList(WorkflowDesigner designer)
        {
@@ -26,9 +22,8 @@ namespace WFDesigner
 
        public static string getXamlFilePath(WorkflowDesigner designer)
        {
-           System.Activities.Presentation.WorkflowFileItem fileItem = designer.Context.Items.GetValue(typeof(System.Activities.Presentation.WorkflowFileItem)) as System.Activities.Presentation.WorkflowFileItem;
+           WorkflowFileItem fileItem = designer.Context.Items.GetValue(typeof(WorkflowFileItem)) as WorkflowFileItem;
            return fileItem.LoadedFile;
        }
-
     }
 }

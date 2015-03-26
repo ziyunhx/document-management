@@ -1,16 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WorkFlow.Core;
 
 namespace UserDesigner
 {
@@ -24,19 +17,16 @@ namespace UserDesigner
             InitializeComponent();
         }
 
-        public void showFlowchar(WorkflowStruct.flowcharStruct flowcharStruct)
+        public void showFlowchar(FlowcharStruct flowcharStruct)
         {
             body.Children.Clear();
 
             //(1)
-
-          
-
-            body.Children.Add(new nodeControl(flowcharStruct.beginNode));
+            body.Children.Add(new NodeControl(flowcharStruct.beginNode));
             //(2)
             foreach (var nodeItem in flowcharStruct.nodeList)
             {
-                body.Children.Add(new nodeControl(nodeItem));
+                body.Children.Add(new NodeControl(nodeItem));
             }
 
             //(3)
@@ -48,14 +38,14 @@ namespace UserDesigner
                 List<Point> ps=new List<Point>();
                 foreach(var i in   lineItem.connectorPoint)
                 {
-                    ps.Add(new Point{ X=i.x ,Y=i.y});
+                    ps.Add(new Point { X=i.x ,Y=i.y});
                 }
 
                 Path line = drawLines(new Point { X = v.x, Y = v.y }, ps);
 
-                line.Stroke = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Colors.Blue);
+                line.Stroke = new SolidColorBrush(Colors.Blue);
                 line.StrokeThickness = 5;
-              //  line.StrokeStartLineCap = PenLineCap.Round;
+                //line.StrokeStartLineCap = PenLineCap.Round;
                 line.StrokeEndLineCap = PenLineCap.Triangle;
                 line.StrokeLineJoin = PenLineJoin.Round;
                 body.Children.Add(line);
@@ -79,9 +69,5 @@ namespace UserDesigner
 
             return path;
         }
-
-   
-    
-    
     }
 }

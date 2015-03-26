@@ -11,7 +11,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Engine</RootNamespace>
     <AssemblyName>Engine</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -24,6 +24,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -32,6 +33,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
@@ -66,9 +68,9 @@
       <Project>{58011CBE-710D-4E35-90E5-8C4F931E946B}</Project>
       <Name>ActivityLibrary</Name>
     </ProjectReference>
-    <ProjectReference Include="..\WorkflowStruct\WorkflowStruct.csproj">
-      <Project>{AB020DD7-28EE-4B03-A972-83987EA6638E}</Project>
-      <Name>WorkflowStruct</Name>
+    <ProjectReference Include="..\WorkFlow.Core\WorkFlow.Core.csproj">
+      <Project>{0ed1a604-576f-469e-aa1f-c6fcfecdd319}</Project>
+      <Name>WorkFlow.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
