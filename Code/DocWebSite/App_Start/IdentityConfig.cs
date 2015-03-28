@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using System.Web;
+﻿using DocWebSite.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
-using DocWebSite.Models;
+using System;
+using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace DocWebSite
 {
@@ -67,14 +63,14 @@ namespace DocWebSite
 
             // Register two factor authentication providers. This application uses Phone and Emails as a step of receiving a code for verifying the user
             // You can write your own provider and plug it in here.
-            manager.RegisterTwoFactorProvider("Phone Code", new PhoneNumberTokenProvider<ApplicationUser>
+            manager.RegisterTwoFactorProvider(Resources.DocLang.PhoneCode, new PhoneNumberTokenProvider<ApplicationUser>
             {
-                MessageFormat = "Your security code is {0}"
+                MessageFormat = Resources.DocLang.SecurityCodeStr
             });
-            manager.RegisterTwoFactorProvider("Email Code", new EmailTokenProvider<ApplicationUser>
+            manager.RegisterTwoFactorProvider(Resources.DocLang.SecurityCode, new EmailTokenProvider<ApplicationUser>
             {
-                Subject = "Security Code",
-                BodyFormat = "Your security code is {0}"
+                Subject = Resources.DocLang.SecurityCode,
+                BodyFormat = Resources.DocLang.SecurityCodeStr
             });
             manager.EmailService = new EmailService();
             manager.SmsService = new SmsService();
@@ -82,7 +78,7 @@ namespace DocWebSite
             if (dataProtectionProvider != null)
             {
                 manager.UserTokenProvider = 
-                    new DataProtectorTokenProvider<ApplicationUser>(dataProtectionProvider.Create("ASP.NET Identity"));
+                    new DataProtectorTokenProvider<ApplicationUser>(dataProtectionProvider.Create(Resources.DocLang.Identity));
             }
             return manager;
         }
