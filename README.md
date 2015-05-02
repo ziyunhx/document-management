@@ -1,4 +1,4 @@
-DocumentManage
+document-management
 ==============
 
-A Document Manage System based  on Windows Workflow Foundation
+A document management system based on windows workflow foundation (WF4.0).
