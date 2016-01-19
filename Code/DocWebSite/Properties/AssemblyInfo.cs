@@ -6,11 +6,11 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("DocWebSite")]
-[assembly: AssemblyDescription("Document Manage Website.")]
+[assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("NewIdea Inc.")]
+[assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("DocWebSite")]
-[assembly: AssemblyCopyright("Copyright ©  2015")]
+[assembly: AssemblyCopyright("Copyright ©  2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("8f3d90ec-e34a-46b3-8ab7-84608b343cd2")]
+[assembly: Guid("ebdde4ea-896c-4f75-a9a1-c0dd10632009")]
 
 // Version information for an assembly consists of the following four values:
 //
